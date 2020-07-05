@@ -1,4 +1,4 @@
-package com.jp.poc.incomeexpense.controller;
+package com.jp.poc.incomeexpense.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -12,8 +12,9 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
-public class IncomeExpenseWrapper {
+public class IncomeExpenseDto {
 
+	private Long id;
     private String villageName;
     private String firstPersonName;
     private String wifeName;
