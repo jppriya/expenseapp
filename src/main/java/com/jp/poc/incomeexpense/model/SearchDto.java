@@ -13,9 +13,8 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
-public class IncomeExpenseDto {
+public class SearchDto {
 	
-	private Long id;
 	
     private String villageName;
     
@@ -23,12 +22,8 @@ public class IncomeExpenseDto {
     
     private String wifeName;
     
-    private String functionName;
     
-    private Date date;
     
-    private BigDecimal incomeAmount;
     
-    private BigDecimal expenseAmount;
 
 }

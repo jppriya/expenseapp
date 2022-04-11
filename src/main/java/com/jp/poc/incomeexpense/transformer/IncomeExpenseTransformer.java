@@ -5,20 +5,20 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.jp.poc.incomeexpense.entity.IncomeExpenseEntity;
+import com.jp.poc.incomeexpense.entity.IncomeExpense;
 import com.jp.poc.incomeexpense.model.IncomeExpenseDto;
 
 @Component
 public class IncomeExpenseTransformer {
 
-	public List<IncomeExpenseEntity> convertDTOListToEntityList(List<IncomeExpenseDto> incomeExpenses) {
-		List<IncomeExpenseEntity> incomeExpenseList = incomeExpenses.stream().map(incomeExpense -> convertDtoTOEntity(incomeExpense))
+	public List<IncomeExpense> convertDTOListToEntityList(List<IncomeExpenseDto> incomeExpenses) {
+		List<IncomeExpense> incomeExpenseList = incomeExpenses.stream().map(incomeExpense -> convertDtoTOEntity(incomeExpense))
 				.collect(Collectors.toList());
 		return incomeExpenseList;
 	}
 
-	public IncomeExpenseEntity convertDtoTOEntity(IncomeExpenseDto incomeExpenses) {
-		IncomeExpenseEntity entity = new IncomeExpenseEntity();
+	public IncomeExpense convertDtoTOEntity(IncomeExpenseDto incomeExpenses) {
+		IncomeExpense entity = new IncomeExpense();
 		entity.setId(incomeExpenses.getId());
 		entity.setDate(null);
 		entity.setExpenseAmount(incomeExpenses.getExpenseAmount());
@@ -31,13 +31,13 @@ public class IncomeExpenseTransformer {
 		return entity;
 	}
 	
-	public List<IncomeExpenseDto> convertEntityToDtoList(List<IncomeExpenseEntity> incomeExpenses) {
+	public List<IncomeExpenseDto> convertEntityToDtoList(List<IncomeExpense> incomeExpenses) {
 		List<IncomeExpenseDto> incomeExpenseList = incomeExpenses.stream().map(incomeExpense -> convertEntityTODto(incomeExpense))
 				.collect(Collectors.toList());
 		return incomeExpenseList;
 	}
 	
-	public IncomeExpenseDto convertEntityTODto(IncomeExpenseEntity incomeExpenseEntity) {
+	public IncomeExpenseDto convertEntityTODto(IncomeExpense incomeExpenseEntity) {
 		IncomeExpenseDto incomeExpenseDto = new IncomeExpenseDto();
 		incomeExpenseDto.setId(incomeExpenseEntity.getId());
 		incomeExpenseDto.setDate(null);

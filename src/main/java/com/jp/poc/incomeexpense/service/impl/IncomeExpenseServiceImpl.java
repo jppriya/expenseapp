@@ -19,8 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jp.poc.incomeexpense.dao.IIncomeExpenseDao;
-import com.jp.poc.incomeexpense.entity.IncomeExpenseEntity;
+import com.jp.poc.incomeexpense.entity.IncomeExpense;
 import com.jp.poc.incomeexpense.model.IncomeExpenseDto;
+import com.jp.poc.incomeexpense.model.MasterDetail;
 import com.jp.poc.incomeexpense.service.IIncomeExpenseService;
 import com.jp.poc.incomeexpense.transformer.IncomeExpenseTransformer;
 
@@ -53,7 +54,7 @@ public class IncomeExpenseServiceImpl implements IIncomeExpenseService {
         }
         incomeExpenses = incomeExpenses.stream().sorted(Comparator.comparing((IncomeExpenseDto e) -> e.getVillageName()).thenComparing(Comparator.comparing((IncomeExpenseDto ex ) -> ex.getFirstPersonName()))).collect(Collectors.toList());
         
-        List<IncomeExpenseEntity> incomeExpenseEntityList = incomeExpenseTransformer.convertDTOListToEntityList(incomeExpenses);
+        List<IncomeExpense> incomeExpenseEntityList = incomeExpenseTransformer.convertDTOListToEntityList(incomeExpenses);
        return incomeExpenseTransformer.convertEntityToDtoList(incomeExpenseDao.updateBulkIncomeExpense(incomeExpenseEntityList));
     }
     
@@ -73,9 +74,29 @@ public class IncomeExpenseServiceImpl implements IIncomeExpenseService {
             if (StringUtils.isNotEmpty(String.valueOf(dataColumn.getCell(6)))) {
                 incomeExpenseWrapper.setIncomeAmount(BigDecimal.valueOf(Double.parseDouble(String.valueOf(dataColumn.getCell(6)))));
             }
+            System.out.println("EXPENSE AMOUNTS OUT"+ dataColumn.getCell(7));
+            if (StringUtils.isNotEmpty(String.valueOf(dataColumn.getCell(7)))) {
+            	System.out.println("EXPENSE AMOUNTS"+ dataColumn.getCell(7));
+                incomeExpenseWrapper.setExpenseAmount(BigDecimal.valueOf(Double.parseDouble(String.valueOf(dataColumn.getCell(7)))));
+            }
             incomeExpenses.add(incomeExpenseWrapper);
         }
         return incomeExpenses;
     }
+
+	@Override
+	public MasterDetail getMasterDetails() {
+		return incomeExpenseDao.getMasterDetails();
+	}
+	
+	@Override
+	public String saveMasterDetails(MasterDetail masterDetail) {
+		return incomeExpenseDao.saveMasterDetail(masterDetail);
+	}
+
+	@Override
+	public List<IncomeExpense> saveIncomeExpenseDetails(List<IncomeExpenseDto> incomeExpenseDtos) {
+		return incomeExpenseDao.saveIncomeExpenseDetails(incomeExpenseTransformer.convertDTOListToEntityList(incomeExpenseDtos));
+	}
 
 }

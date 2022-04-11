@@ -24,7 +24,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "moi_details", schema="master")
-public class IncomeExpenseEntity implements Serializable{
+public class IncomeExpense implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
