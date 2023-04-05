@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jp.poc.incomeexpense.entity.IncomeExpense;
 import com.jp.poc.incomeexpense.model.IncomeExpenseDto;
 import com.jp.poc.incomeexpense.model.MasterDetail;
+import com.jp.poc.incomeexpense.model.MoiDetailsDTO;
 
 public interface IIncomeExpenseService {
     List<IncomeExpenseDto> uploadIncomeAndExpense(MultipartFile multipartFile);
@@ -16,4 +17,6 @@ public interface IIncomeExpenseService {
 	String saveMasterDetails(MasterDetail masterDetail);
 
 	List<IncomeExpense> saveIncomeExpenseDetails(List<IncomeExpenseDto> incomeExpenseDtos);
+
+	List<MoiDetailsDTO> getMoiDetails(String search);
 }

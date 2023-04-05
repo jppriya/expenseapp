@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jp.poc.incomeexpense.entity.IncomeExpense;
 import com.jp.poc.incomeexpense.model.IncomeExpenseDto;
 import com.jp.poc.incomeexpense.model.MasterDetail;
+import com.jp.poc.incomeexpense.model.MoiDTO;
+import com.jp.poc.incomeexpense.model.MoiDetailsDTO;
 import com.jp.poc.incomeexpense.service.IIncomeExpenseService;
 
 import io.swagger.annotations.Api;
@@ -47,6 +49,9 @@ public class IncomeExpenseController {
 		return incomeExpenseService.saveIncomeExpenseDetails(incomeExpenseDtos);
 	}
 	
-	
+	@PostMapping(value = "/get-moi-details", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<MoiDetailsDTO> getMoiDetails(@RequestBody MoiDTO moiDTO) {
+		return incomeExpenseService.getMoiDetails(moiDTO.getSearch());
+	}
 
 }

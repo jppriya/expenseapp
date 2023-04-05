@@ -17,6 +17,7 @@ import com.jp.poc.incomeexpense.entity.IncomeExpense;
 import com.jp.poc.incomeexpense.entity.State;
 import com.jp.poc.incomeexpense.model.DistrictDto;
 import com.jp.poc.incomeexpense.model.MasterDetail;
+import com.jp.poc.incomeexpense.model.MoiDetailsDTO;
 import com.jp.poc.incomeexpense.model.StateDto;
 import com.jp.poc.incomeexpense.model.VillageDto;
 import com.jp.poc.incomeexpense.repository.DistrictRepository;
@@ -106,6 +107,11 @@ public class IncomeExpenseDaoImpl implements IIncomeExpenseDao {
 	public List<IncomeExpense> saveIncomeExpenseDetails(List<IncomeExpense> incomeExpenses) {
 		List<IncomeExpense> savedEntity = incomeExpenseRepositry.saveAll(incomeExpenses);
 		return savedEntity;
+	}
+
+	@Override
+	public List<MoiDetailsDTO> getMoiDetails(String search) {
+		return incomeExpenseRepositry.find;
 	}
 
 }

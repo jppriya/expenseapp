@@ -22,6 +22,7 @@ import com.jp.poc.incomeexpense.dao.IIncomeExpenseDao;
 import com.jp.poc.incomeexpense.entity.IncomeExpense;
 import com.jp.poc.incomeexpense.model.IncomeExpenseDto;
 import com.jp.poc.incomeexpense.model.MasterDetail;
+import com.jp.poc.incomeexpense.model.MoiDetailsDTO;
 import com.jp.poc.incomeexpense.service.IIncomeExpenseService;
 import com.jp.poc.incomeexpense.transformer.IncomeExpenseTransformer;
 
@@ -97,6 +98,12 @@ public class IncomeExpenseServiceImpl implements IIncomeExpenseService {
 	@Override
 	public List<IncomeExpense> saveIncomeExpenseDetails(List<IncomeExpenseDto> incomeExpenseDtos) {
 		return incomeExpenseDao.saveIncomeExpenseDetails(incomeExpenseTransformer.convertDTOListToEntityList(incomeExpenseDtos));
+	}
+
+
+	@Override
+	public List<MoiDetailsDTO> getMoiDetails(String search) {
+		return incomeExpenseDao.getMoiDetails(search);
 	}
 
 }
