@@ -10,6 +10,8 @@ import com.jp.poc.incomeexpense.model.MasterDetail;
 
 public interface IIncomeExpenseService {
     List<IncomeExpenseDto> uploadIncomeAndExpense(MultipartFile multipartFile);
+    
+    List<IncomeExpenseDto> getExpenseDetails();
 
 	MasterDetail getMasterDetails();
 

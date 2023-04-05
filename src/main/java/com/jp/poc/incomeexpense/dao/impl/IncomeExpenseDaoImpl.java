@@ -1,10 +1,8 @@
 package com.jp.poc.incomeexpense.dao.impl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.jp.poc.incomeexpense.dao.IIncomeExpenseDao;
 import com.jp.poc.incomeexpense.entity.IncomeExpense;
-import com.jp.poc.incomeexpense.entity.State;
 import com.jp.poc.incomeexpense.model.DistrictDto;
 import com.jp.poc.incomeexpense.model.MasterDetail;
 import com.jp.poc.incomeexpense.model.StateDto;
@@ -26,6 +23,8 @@ import com.jp.poc.incomeexpense.repository.VillageRepository;
 import com.jp.poc.incomeexpense.transformer.DistrictMapper;
 import com.jp.poc.incomeexpense.transformer.StateMapper;
 import com.jp.poc.incomeexpense.transformer.VilageMapper;
+
+import jakarta.transaction.Transactional;
 
 @Component
 @Transactional
@@ -107,5 +106,12 @@ public class IncomeExpenseDaoImpl implements IIncomeExpenseDao {
 		List<IncomeExpense> savedEntity = incomeExpenseRepositry.saveAll(incomeExpenses);
 		return savedEntity;
 	}
+
+	@Override
+	public List<IncomeExpense> getAllExpense() {
+		return incomeExpenseRepositry.findAll();
+	}
+	
+	
 
 }

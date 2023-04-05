@@ -15,4 +15,6 @@ public interface IIncomeExpenseDao {
 
 	public List<IncomeExpense> saveIncomeExpenseDetails(List<IncomeExpense> list);
 	
+	public List<IncomeExpense> getAllExpense();
+	
 }

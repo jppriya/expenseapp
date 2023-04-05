@@ -31,6 +31,12 @@ public class IncomeExpenseController {
 	public List<IncomeExpenseDto> uploadEmployee(@RequestPart MultipartFile multipartFile) {
 		return incomeExpenseService.uploadIncomeAndExpense(multipartFile);
 	}
+	
+	@ApiOperation(value = "View List of expenses", response = List.class)
+	@PostMapping(value = "/expenses", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<IncomeExpenseDto> moiDetails() {
+		return incomeExpenseService.getExpenseDetails();
+	}
 
 	@GetMapping(value = "/masterdata", produces = MediaType.APPLICATION_JSON_VALUE)
 	public MasterDetail getMasterDetails() {

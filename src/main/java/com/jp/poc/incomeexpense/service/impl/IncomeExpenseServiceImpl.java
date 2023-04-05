@@ -8,7 +8,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Row;
@@ -24,6 +23,8 @@ import com.jp.poc.incomeexpense.model.IncomeExpenseDto;
 import com.jp.poc.incomeexpense.model.MasterDetail;
 import com.jp.poc.incomeexpense.service.IIncomeExpenseService;
 import com.jp.poc.incomeexpense.transformer.IncomeExpenseTransformer;
+
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -97,6 +98,14 @@ public class IncomeExpenseServiceImpl implements IIncomeExpenseService {
 	@Override
 	public List<IncomeExpense> saveIncomeExpenseDetails(List<IncomeExpenseDto> incomeExpenseDtos) {
 		return incomeExpenseDao.saveIncomeExpenseDetails(incomeExpenseTransformer.convertDTOListToEntityList(incomeExpenseDtos));
+	}
+
+
+	@Override
+	public List<IncomeExpenseDto> getExpenseDetails() {
+		List<IncomeExpense> incomeExpenses = incomeExpenseDao.getAllExpense().stream().sorted(Comparator.comparing((IncomeExpense e) -> e.getVillageName()).thenComparing(Comparator.comparing((IncomeExpense ex ) -> ex.getFirstPersonName()))).collect(Collectors.toList());
+	    List<IncomeExpenseDto> incomeExpenseEntityList = incomeExpenseTransformer.convertEntityToDtoList(incomeExpenses);
+	    return incomeExpenseEntityList;
 	}
 
 }
